@@ -1,0 +1,33 @@
+POST http://localhost:8080/api/users/register
+Content-Type: application/json
+
+{
+  "name":"Kinshuk",
+  "email":"kinshuk@test.com",
+  "password":"12345",
+  "role":"USER"
+}
+### ASSIGN TICKET
+
+POST http://localhost:8080/api/tickets/assign
+Content-Type: application/json
+
+{
+  "ticketId":1,
+  "agentId":1
+}
+### UPDATE STATUS
+
+PUT http://localhost:8080/api/tickets/status/1?status=RESOLVED
+
+
+POST http://localhost:8080/api/comments
+Content-Type: application/json
+
+{
+  "ticketId":1,
+  "userId":1,
+  "message":"Investigating login issue"
+}
+
+GET http://localhost:8080/api/comments/ticket/1

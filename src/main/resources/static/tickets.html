@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Tickets</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+</head>
+
+<body>
+
+<h1>Ticket Management</h1>
+
+<div class="nav">
+
+    <button onclick="window.location='dashboard.html'">
+        Dashboard
+    </button>
+
+    <button onclick="window.location='tickets.html'">
+        Tickets
+    </button>
+
+    <button onclick="window.location='comments.html'">
+        Comments
+    </button>
+
+    <button onclick="window.location='reports.html'">
+        Reports
+    </button>
+
+    <button onclick="window.location='admin.html'">
+        Admin
+    </button>
+
+    <button onclick="window.location='agent.html'">
+        Agent
+    </button>
+
+</div>
+
+<div class="section">
+
+    <h2>Create Ticket</h2>
+
+    <input
+            id="title"
+            placeholder="Ticket Title">
+
+    <input
+            id="description"
+            placeholder="Ticket Description">
+
+    <select id="priority">
+
+        <option value="">
+            Select Priority
+        </option>
+
+        <option value="HIGH">
+            HIGH
+        </option>
+
+        <option value="MEDIUM">
+            MEDIUM
+        </option>
+
+        <option value="LOW">
+            LOW
+        </option>
+
+    </select>
+
+    <input
+            id="userId"
+            placeholder="User ID">
+
+    <button
+            onclick="createTicket()">
+
+        Create Ticket
+
+    </button>
+
+</div>
+
+<div class="section">
+
+    <h2>Assign Ticket</h2>
+
+    <input
+            id="ticketId"
+            placeholder="Ticket ID">
+
+    <input
+            id="agentId"
+            placeholder="Agent ID">
+
+    <button
+            onclick="assignTicket()">
+
+        Assign Agent
+
+    </button>
+
+</div>
+
+<div class="section">
+
+    <h2>Update Status</h2>
+
+    <input
+            id="statusTicketId"
+            placeholder="Ticket ID">
+
+    <select
+            id="status">
+
+        <option value="">
+            Select Status
+        </option>
+
+        <option value="OPEN">
+            OPEN
+        </option>
+
+        <option value="IN_PROGRESS">
+            IN_PROGRESS
+        </option>
+
+        <option value="RESOLVED">
+            RESOLVED
+        </option>
+
+    </select>
+
+    <button
+            onclick="updateStatus()">
+
+        Update Status
+
+    </button>
+
+</div>
+
+<div class="section">
+
+    <h2>All Tickets</h2>
+
+    <table>
+
+        <thead>
+
+        <tr>
+
+            <th>ID</th>
+
+            <th>Title</th>
+
+            <th>Priority</th>
+
+            <th>Status</th>
+
+            <th>Assigned Agent</th>
+
+        </tr>
+
+        </thead>
+
+        <tbody
+                id="ticketTable">
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<script src="/js/app.js"></script>
+
+<script>
+
+    loadTickets();
+
+</script>
+
+</body>
+
+</html>

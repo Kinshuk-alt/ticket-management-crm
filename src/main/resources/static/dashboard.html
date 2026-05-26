@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Dashboard</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+</head>
+<body>
+
+<h1>Ticket Management CRM</h1>
+
+<div class="nav">
+
+    <button onclick="window.location='dashboard.html'">
+        Dashboard
+    </button>
+
+    <button onclick="window.location='tickets.html'">
+        Tickets
+    </button>
+
+    <button onclick="window.location='comments.html'">
+        Comments
+    </button>
+
+    <button onclick="window.location='reports.html'">
+        Reports
+    </button>
+
+    <button onclick="window.location='admin.html'">
+        Admin
+    </button>
+
+    <button onclick="window.location='agent.html'">
+        Agent
+    </button>
+
+</div>
+
+<div id="dashboard"
+     class="cards">
+
+    Loading...
+
+</div>
+
+<script src="/js/app.js"></script>
+
+<script>
+
+    loadDashboard();
+
+</script>
+
+</body>
+</html>
