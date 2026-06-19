@@ -1,56 +1,62 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
-    <title>Comments</title>
-
-    <link rel="stylesheet"
-          href="../css/style.css">
-
+    <title>Ticket Comments</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
-
 <body>
 
-<h1>Ticket Comments</h1>
+<div class="layout-container">
+    <div class="sidebar">
+        <div class="logo">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            <span>CRM Agent</span>
+        </div>
+        <button class="btn btn-outline" onclick="window.location='dashboard.html'">Dashboard</button>
+        <button class="btn btn-outline" onclick="window.location='tickets.html'">My Assigned Tickets</button>
+        <button class="btn btn-outline" onclick="window.location='comments.html'">Comments</button>
+        <button class="btn btn-danger" onclick="logout()" style="margin-top: auto;">Logout</button>
+    </div>
 
-<input
-        id="ticketId"
-        placeholder="Ticket ID">
+    <div class="main-content">
+        <div class="topbar">
+            <h2>Ticket Comments</h2>
+            <div class="profile">
+                <h3 id="welcome"></h3>
+            </div>
+        </div>
 
-<br><br>
+        <div class="section" style="max-width: 800px;">
+            <h3>Add a Comment</h3>
+            <div style="display: flex; gap: 16px;">
+                <div class="form-group" style="flex: 1;">
+                    <label>Ticket ID</label>
+                    <input id="ticketId" placeholder="e.g. 1">
+                </div>
+                <div class="form-group" style="flex: 1;">
+                    <label>User ID</label>
+                    <input id="userId" placeholder="Your User ID">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Message</label>
+                <textarea id="message" placeholder="Write your comment here..." rows="3"></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="addComment()">Add Comment</button>
+        </div>
 
-<input
-        id="userId"
-        placeholder="User ID">
-
-<br><br>
-
-<textarea
-        id="message"
-        placeholder="Comment">
-
-</textarea>
-
-<br><br>
-
-<button
-        onclick="addComment()">
-
-    Add Comment
-
-</button>
-
-<hr>
-
-<div id="comments">
-
-    Loading...
-
+        <div id="comments" class="chat-container">
+            Loading...
+        </div>
+    </div>
 </div>
 
 <script src="../js/app.js"></script>
-
+<script>
+    checkRole("AGENT");
+    showUser();
+    // loadComments(); -> app.js has loadComments, but it's not called on load in original. We can leave it as is or call it if needed.
+    // original didn't call it on load.
+</script>
 </body>
-
 </html>

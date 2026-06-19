@@ -68,6 +68,10 @@ public class UserServiceImpl
                 dto.getRole()
         );
 
+        user.setSpecialization(
+                dto.getSpecialization()
+        );
+
         return userRepository.save(
                 user
         );

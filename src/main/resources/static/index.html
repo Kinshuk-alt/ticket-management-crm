@@ -1,73 +1,21 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
     <title>CRM Portal</title>
-
-    <link rel="stylesheet"
-          href="css/style.css">
-
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-
-<div class="box">
-
-    <h1>Ticket Management CRM</h1>
-
-    <p>
-
-        Choose your portal
-
-    </p>
-
-    <br>
-
-    <button onclick="
-window.location=
-'user/login.html'
-">
-
-        User Portal
-
-    </button>
-
-    <br><br>
-
-    <button onclick="
-window.location=
-'agent/login.html'
-">
-
-        Agent Portal
-
-    </button>
-
-    <br><br>
-
-    <button onclick="
-window.location=
-'admin/login.html'
-">
-
-        Admin Portal
-
-    </button>
-
-    <br><br>
-
-    <button onclick="
-window.location=
-'register.html'
-">
-
-        Register New User
-
-    </button>
-
+<div class="box-wrapper">
+    <div class="box">
+        <h1 style="color: var(--primary);">CRM Portal</h1>
+        <p>Choose your portal to sign in</p>
+        
+        <button class="btn btn-primary btn-block" onclick="window.location='user/login.html'">User Portal</button>
+        <button class="btn btn-outline btn-block" onclick="window.location='agent/login.html'">Agent Portal</button>
+        <button class="btn btn-outline btn-block" onclick="window.location='admin/login.html'">Admin Portal</button>
+        <br>
+        <button class="btn btn-success btn-block" onclick="window.location='register.html'">Register New User</button>
+    </div>
 </div>
-
 </body>
-
 </html>

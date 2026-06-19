@@ -21,7 +21,7 @@ public class Ticket {
     @Id
 
     @GeneratedValue(
-            strategy=
+            strategy =
                     GenerationType.IDENTITY
     )
 
@@ -33,21 +33,26 @@ public class Ticket {
 
     private String priority;
 
+    private String category;
+
     private String status;
 
     private LocalDateTime createdAt;
 
+    private LocalDateTime closedAt;
+
     @ManyToOne
 
     @JoinColumn(
-            name="created_by"
+            name = "created_by"
     )
 
     private User createdBy;
+
     @ManyToOne
 
     @JoinColumn(
-            name="assigned_to"
+            name = "assigned_to"
     )
 
     private User assignedTo;

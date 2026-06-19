@@ -59,6 +59,9 @@ public class TicketServiceImpl
         ticket.setPriority(
                 dto.getPriority()
         );
+        ticket.setCategory(
+                dto.getCategory()
+        );
 
         ticket.setStatus(
                 "OPEN"

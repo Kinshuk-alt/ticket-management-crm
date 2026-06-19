@@ -16,6 +16,8 @@ public class TicketDTO {
 
     private String priority;
 
+    private String category;
+
     private Long userId;
 
 }

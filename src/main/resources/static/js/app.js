@@ -449,34 +449,20 @@ t => {
 html +=
 
 `
-
 <tr>
-
 <td>${t.id}</td>
-
 <td>${t.title}</td>
-
 <td>${t.priority}</td>
-
-<td>${t.status}</td>
-
+<td><span class="badge status-${t.status}">${t.status}</span></td>
 <td>
-
 ${
 t.assignedTo ?
-
 t.assignedTo.name
-
 :
-
 "Not Assigned"
-
 }
-
 </td>
-
 </tr>
-
 `;
 
 }
@@ -610,19 +596,10 @@ document
 .innerHTML=
 
 `
-
-<p>Total Tickets:
-${data.totalTickets}</p>
-
-<p>Open Tickets:
-${data.openTickets}</p>
-
-<p>Resolved Tickets:
-${data.resolvedTickets}</p>
-
-<p>High Priority:
-${data.highPriorityTickets}</p>
-
+<div class="card"><h3>Total Tickets</h3><p>${data.totalTickets}</p></div>
+<div class="card"><h3>Open Tickets</h3><p>${data.openTickets}</p></div>
+<div class="card"><h3>Resolved Tickets</h3><p>${data.resolvedTickets}</p></div>
+<div class="card"><h3>High Priority</h3><p>${data.highPriorityTickets}</p></div>
 `;
 
 }
@@ -727,31 +704,10 @@ c => {
 html +=
 
 `
-
-<div class="card">
-
-<p>
-
-Ticket:
-${c.ticket.id}
-
-</p>
-
-<p>
-
-User:
-${c.user.name}
-
-</p>
-
-<p>
-
-${c.message}
-
-</p>
-
+<div class="chat-message ${c.user.id == sessionStorage.getItem('userId') ? 'me' : 'other'}">
+<div class="meta">${c.user.name} (Ticket #${c.ticket.id})</div>
+<div>${c.message}</div>
 </div>
-
 `;
 
 }
@@ -793,38 +749,18 @@ t=>{
 html +=
 
 `
-
 <div class="card">
-
-<h3>
-
-${t.title}
-
-</h3>
-
-<p>
-
-Priority:
-${t.priority}
-
-</p>
-
-<p>
-
-Status:
-${t.status}
-
-</p>
-
-<p>
-
-Created By:
-${t.createdBy.name}
-
-</p>
-
+<h3>${t.title}</h3>
+<p>Priority: ${t.priority}</p>
+<p>Category: ${t.category}</p>
+<p>Status: <span class="badge status-${t.status}">${t.status}</span></p>
+<p>Created By: ${t.createdBy.name}</p>
+<div class="actions">
+${t.status === "OPEN" ? `<button class="btn btn-primary" onclick="startWork(${t.id})">Start Work</button>` : ""}
+${t.status === "IN_PROGRESS" ? `<button class="btn btn-success" onclick="resolveTicket(${t.id})">Resolve</button>` : ""}
+${t.status === "RESOLVED" ? `<p style="font-size: 0.85rem; margin-top: 8px;">Waiting for user confirmation</p>` : ""}
 </div>
-
+</div>
 `;
 
 }
@@ -1090,7 +1026,6 @@ r.style.display=
 async function createUserTicket(){
 
 const userId=
-
 sessionStorage.getItem(
 "userId"
 );
@@ -1112,15 +1047,20 @@ document.getElementById(
 "priority"
 ).value,
 
+category:
+document.getElementById(
+"category"
+).value,
+
 userId:
 userId
 
 };
 
+const response=
 await fetch(
 "/api/tickets",
 {
-
 method:"POST",
 
 headers:{
@@ -1132,13 +1072,29 @@ body:
 JSON.stringify(
 data
 )
-
 }
+);
 
+console.log(
+"STATUS:",
+response.status
+);
+
+const result=
+await response.text();
+
+console.log(
+"RESPONSE:",
+result
 );
 
 alert(
-"Ticket Submitted"
+"Status = "
++ response.status
++
+"\n"
++
+result
 );
 
 loadUserTickets();
@@ -1183,42 +1139,21 @@ t=>{
 html +=
 
 `
-
 <tr>
-
+<td>${t.id}</td>
+<td>${t.title}</td>
+<td>${t.category}</td>
+<td>${t.priority}</td>
+<td><span class="badge status-${t.status}">${t.status}</span></td>
 <td>
-${t.id}
-</td>
-
-<td>
-${t.title}
-</td>
-
-<td>
-${t.priority}
-</td>
-
-<td>
-${t.status}
-</td>
-
-<td>
-
 ${
 t.assignedTo ?
-
 t.assignedTo.name
-
 :
-
 "Not Assigned"
-
 }
-
 </td>
-
 </tr>
-
 `;
 
 }
@@ -1233,6 +1168,42 @@ document
 .innerHTML=
 
 html;
+
+}
+
+async function startWork(
+ticketId
+){
+
+await fetch(
+
+`/api/tickets/status/${ticketId}?status=IN_PROGRESS`,
+
+{
+method:"PUT"
+}
+
+);
+
+loadAgentTickets();
+
+}
+
+async function resolveTicket(
+ticketId
+){
+
+await fetch(
+
+`/api/tickets/status/${ticketId}?status=RESOLVED`,
+
+{
+method:"PUT"
+}
+
+);
+
+loadAgentTickets();
 
 }
 

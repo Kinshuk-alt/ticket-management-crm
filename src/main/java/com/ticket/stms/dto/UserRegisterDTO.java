@@ -37,4 +37,6 @@ public class UserRegisterDTO {
 
     private String role;
 
+    private String specialization;
+
 }
